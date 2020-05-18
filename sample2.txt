@@ -1,0 +1,93 @@
+<!DOCTYPEhtml>
+<html>
+<head>
+<title>task1</title>
+<h1>EMPLOYEE DETAILS</h1>
+<style>
+.container{overflow: hidden}
+.tab{float:left}
+.tab{margin-left: 50px;}
+.tab-2{margin-left: 10px}
+.tab-2 input{display: block;margin-bottom: 20px;}
+.tab-2 {padding-left:30px;}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="tab tab-2">
+<table id="table" border="1">
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>phone</th>
+</tr>
+</table>
+</div>
+<div class="tab tab-2" >
+name :<input type="text" name="name" id="name">
+Email :<input type="text" name="Email" id="Email">
+phone :<input type="number" name="phone" id="phone">
+
+<button onclick=" addHtmlTableRow();">Add</button>
+<button onclick=" editHtmlTableSelectedRow()">Edit</button>
+<button onclick="removeSelectedrow()">Delete</button>
+</div>
+</div>
+<script>
+    var rIndex,
+        table = document.getElementById("table");
+
+    function addHtmlTableRow()
+    {
+        var newRow = table.insertRow(table.length),
+        cell1 = newRow.insertCell(0),
+        cell2 = newRow.insertCell(1),
+        cell3 = newRow.insertCell(2);
+        name = document.getElementById("name").value,
+        Email = document.getElementById("Email").value,
+        phone = document.getElementById("phone").value;
+
+        cell1.innerHTML=name;
+        cell2.innerHTML=Email;
+        cell3.innerHTML=phone;
+
+        selectedRowToInput();
+
+    }
+
+    function selectedRowToInput()
+    {
+        
+        for(var i = 1; i < table.rows.length; i++)
+        {
+            table.rows[i].onclick = function()
+            {
+                rIndex = this.rowIndex;
+              document.getElementById("name").value = this.cells[0].innerHTML;
+              document.getElementById("Email").value = this.cells[1].innerHTML;
+              document.getElementById("phone").value = this.cells[2].innerHTML;
+            };
+        }
+    }
+    selectedRowToInput();
+
+    function editHtmlTableSelectedRow()
+{
+    var name = document.getElementById("name").value,
+        Email = document.getElementById("Email").value,
+        phone = document.getElementById("phone").value;
+
+        table.rows[rIndex].cells[0].innerHTML = name;
+        table.rows[rIndex].cells[1].innerHTML = Email;
+        table.rows[rIndex].cells[2].innerHTML = phone;
+}
+
+
+function removeSelectedrow()
+{
+    table.deleteRow(rIndex);
+}
+</script>
+
+</body>
+</html>
